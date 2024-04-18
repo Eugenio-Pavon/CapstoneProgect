@@ -1,0 +1,57 @@
+GET http://localhost:3030/user
+
+####
+GET http://localhost:3030/product
+
+####
+POST http://localhost:3030/product
+Content-Type: application/json
+    
+    {
+    "category":"xyz3",
+    "title":"xyz3",
+    "cover":"xyz3",
+    "price":"xyz",
+    "description":"xyz"
+    
+}
+####
+POST http://localhost:3030/user
+Content-Type: application/json
+    
+    {
+      
+    "firstName": "xyz3",
+    "lastName": "xyz3",
+    "email": "xyz",
+    "password": "xyz"
+
+    
+}
+
+####
+PATCH  http://localhost:3030/user/6620417fefd0643bbb789677
+Content-Type: application/json
+    
+    {
+    
+    "email":"abc2@gmail.it"
+    
+}
+####
+DELETE http://localhost:3030/user/6620418eefd0643bbb789679
+####
+
+
+PATCH  http://localhost:3030/product/66204156efd0643bbb789673
+Content-Type: application/json
+    
+    {
+    
+    "price":"1234"
+    
+}
+####
+DELETE http://localhost:3030/product/6620416eefd0643bbb789675
+####
+
