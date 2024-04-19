@@ -1,6 +1,8 @@
 const express = require("express");
 const user = express.Router();
 const userModel = require("../models/user");
+const bcrypt = require("bcrypt");
+const validateUserBody = require("../middlewares/verifyUserBody");
 
 require("dotenv").config();
 
@@ -17,12 +19,14 @@ user.get("/", async (req, resp) => {
   }
 });
 
-user.post("/", async (req, resp) => {
+user.post("/", validateUserBody, async (req, resp) => {
+  const salt = await bcrypt.genSalt(10);
+  const hashedPassword = await bcrypt.hash(req.body.password, salt);
   const newuser = new userModel({
     firstName: req.body.firstName,
     lastName: req.body.lastName,
     email: req.body.email,
-    password: req.body.password,
+    password: hashedPassword,
   });
   try {
     const userToSave = await newuser.save();

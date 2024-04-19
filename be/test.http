@@ -21,10 +21,10 @@ Content-Type: application/json
     
     {
       
-    "firstName": "xyz3",
-    "lastName": "xyz3",
-    "email": "xyz",
-    "password": "xyz"
+    "firstName": "xyz5",
+    "lastName": "xyz5",
+    "email": "xyz5",
+    "password": "xyz5"
 
     
 }
@@ -54,4 +54,12 @@ Content-Type: application/json
 ####
 DELETE http://localhost:3030/product/6620416eefd0643bbb789675
 ####
+
+POST  http://localhost:3030/login
+Content-Type: application/json
+
+{
+    "email": "xyz5",
+    "password": "xyz5"
+}
 
