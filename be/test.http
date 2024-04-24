@@ -1,16 +1,16 @@
 GET http://localhost:3030/user
 
 ####
-GET http://localhost:3030/product
+GET http://localhost:3030/product?page=1
 
 ####
 POST http://localhost:3030/product
 Content-Type: application/json
     
     {
-    "category":"xyz3",
-    "title":"xyz3",
-    "cover":"xyz3",
+    "category":"xyz12",
+    "title":"xyz12",
+    "cover":"https://picsum.photos/200/300",
     "price":"xyz",
     "description":"xyz"
     
@@ -21,10 +21,10 @@ Content-Type: application/json
     
     {
       
-    "firstName": "xyz5",
+    "firstName": "xyz",
     "lastName": "xyz5",
-    "email": "xyz5",
-    "password": "xyz5"
+    "email": "abcdef2@gmail.it",
+    "password": "123456xyz5"
 
     
 }
@@ -43,12 +43,12 @@ DELETE http://localhost:3030/user/6620418eefd0643bbb789679
 ####
 
 
-PATCH  http://localhost:3030/product/66204156efd0643bbb789673
+PATCH  http://localhost:3030/product/661fd2d8f1fb335917902aaa
 Content-Type: application/json
     
     {
     
-    "price":"1234"
+    "cover":"https://picsum.photos/200/300"
     
 }
 ####
@@ -63,3 +63,6 @@ Content-Type: application/json
     "password": "xyz5"
 }
 
+####
+
+GET http://localhost:3030/product/661fd2d8f1fb335917902aaa

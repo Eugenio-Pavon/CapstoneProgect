@@ -1,14 +1,15 @@
 import React from "react";
-import AllProducts from "../components/AllProducts";
-import MyNavBar from "../components/MyNavBar";
 
-const Home = () => {
+import MyNavBar from "../components/MyNavBar";
+import CartProduct from "../components/CartProduct";
+
+const Cart = () => {
   return (
     <>
       <MyNavBar />
-      <AllProducts />
+      <CartProduct />
     </>
   );
 };
 
-export default Home;
+export default Cart;

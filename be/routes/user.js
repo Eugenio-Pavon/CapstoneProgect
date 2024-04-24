@@ -3,10 +3,11 @@ const user = express.Router();
 const userModel = require("../models/user");
 const bcrypt = require("bcrypt");
 const validateUserBody = require("../middlewares/verifyUserBody");
+const verified = require("../middlewares/verifyToken");
 
 require("dotenv").config();
 
-user.get("/", async (req, resp) => {
+user.get("/", verified, async (req, resp) => {
   try {
     const user = await userModel.find();
 

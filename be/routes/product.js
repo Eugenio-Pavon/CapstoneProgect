@@ -5,10 +5,19 @@ const productModel = require("../models/product");
 require("dotenv").config();
 
 product.get("/", async (req, resp) => {
+  const { page = 1, pageSize = 5 } = req.query;
   try {
-    const product = await productModel.find();
+    const product = await productModel
+      .find()
+      .limit(pageSize)
+      .skip((page - 1) * pageSize);
+    const totalProducts = await productModel.countDocuments();
 
-    resp.status(200).send(product);
+    resp.status(200).send({
+      product,
+      currentPage: +page,
+      totalPages: Math.ceil(totalProducts / pageSize),
+    });
   } catch (e) {
     resp.status(500).send({
       statusCode: 500,
@@ -77,6 +86,26 @@ product.delete("/:id", async (req, resp) => {
     }
 
     resp.status(200).send(`product with id ${id} succesfully removed`);
+  } catch (e) {
+    resp.status(500).send({
+      statusCode: 500,
+      message: "internal server erroror",
+    });
+  }
+});
+
+product.get("/:id", async (req, resp) => {
+  const { id } = req.params;
+  try {
+    const product = await productModel.findById(id);
+    if (!product) {
+      return resp.status(404).send({
+        statusCode: 404,
+        message: "the request product doesn't exist",
+      });
+    }
+
+    resp.status(200).send(product);
   } catch (e) {
     resp.status(500).send({
       statusCode: 500,
