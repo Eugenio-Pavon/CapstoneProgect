@@ -2,10 +2,14 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
+import { useCart } from "../context/CartContext";
+import MyNavBar from "../components/MyNavBar";
+import "./Details.css";
 
 function Details() {
   const { id } = useParams();
   const [product, setProduct] = useState(null);
+  const { dispatch } = useCart();
 
   useEffect(() => {
     const getProductDetails = async () => {
@@ -22,31 +26,37 @@ function Details() {
     getProductDetails();
   }, [id]);
 
+  const addToCart = () => {
+    dispatch({ type: "AGGIUNGI_AL_CARRELLO", payload: product });
+  };
+
   if (!product) {
     return <p>Loading...</p>;
   }
 
   return (
-    <div key={product._id}>
-      <h2>{product.title}</h2>
-      <img style={{ width: 200 }} src={product.cover} alt={product.title} />
-      <p>
-        <strong>Price:</strong> {product.price}$
-      </p>
-      <p>
-        <strong>Category:</strong> {product.category}
-      </p>
-      <p>
-        <strong>Description:</strong> {product.description}
-      </p>
-      <p>
-        <strong>Published on:</strong>{" "}
-        {new Date(product.createdAt).toLocaleDateString()}
-      </p>
-      <Link to={`/cart/${product._id}`} className="btn btn-primary">
-        add to Cart
-      </Link>
-    </div>
+    <>
+      <MyNavBar />
+      <div key={product._id} className="details-container">
+        <h2>{product.title}</h2>
+        <img style={{ width: 200 }} src={product.cover} alt={product.title} />
+        <p>
+          <strong>Price:</strong> {product.price}$
+        </p>
+        <p>
+          <strong>Category:</strong> {product.category}
+        </p>
+        <p>
+          <strong>Description:</strong> {product.description}
+        </p>
+        <p>
+          <strong>Published on:</strong>{" "}
+          {new Date(product.createdAt).toLocaleDateString()}
+        </p>
+        <button onClick={addToCart}>Add to cart</button>
+        <Link to="/cart">Go to cart</Link>
+      </div>
+    </>
   );
 }
 

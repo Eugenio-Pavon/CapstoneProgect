@@ -21,7 +21,8 @@ const Register = () => {
     e.preventDefault();
     const response = await client.post("/user", formData);
     if (response.statusCode === 201) {
-      navigate("/home");
+      localStorage.setItem("auth", response.token);
+      navigate("/cart");
     }
   };
 

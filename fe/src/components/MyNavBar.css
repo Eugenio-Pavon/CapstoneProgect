@@ -1,0 +1,7 @@
+.myNavbar {
+  background-color: #031626;
+  position: fixed !important;
+  top: 0;
+  width: 100%;
+  z-index: 2;
+}

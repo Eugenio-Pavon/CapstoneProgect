@@ -1,0 +1,36 @@
+.cartProduct img {
+  max-height: 250px;
+  object-fit: cover;
+}
+
+.cartContainer {
+  margin-top: 70px;
+  margin-left: 30px;
+
+  width: 80%;
+}
+
+.cartContainer .cartButtons {
+  width: auto;
+}
+
+.cartContainer .card-body {
+  gap: 30px;
+}
+
+.cartContainer .cartButtons .btn {
+  margin-bottom: 5px;
+}
+
+svg {
+  z-index: 1 !important;
+  position: absolute;
+  top: 30px;
+  right: 0px;
+  padding-inline: 20px;
+  position: fixed;
+
+  background-color: #88212b;
+  height: 100%;
+  width: 200px !important;
+}

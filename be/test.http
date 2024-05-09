@@ -8,8 +8,8 @@ POST http://localhost:3030/product
 Content-Type: application/json
     
     {
-    "category":"xyz12",
-    "title":"xyz12",
+    "category":"xyz12345678899012344566789013245779890904324354657234",
+    "title":"xyz12345678901234567890123456789012345678901234567890123456789074575234",
     "cover":"https://picsum.photos/200/300",
     "price":"xyz",
     "description":"xyz"

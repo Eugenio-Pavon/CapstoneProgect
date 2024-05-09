@@ -1,11 +1,48 @@
 const express = require("express");
 const product = express.Router();
 const productModel = require("../models/product");
+const verified = require("../middlewares/verifyToken");
+const cloudinary = require("cloudinary").v2;
+const { CloudinaryStorage } = require("multer-storage-cloudinary");
+
+const multer = require("multer");
 
 require("dotenv").config();
 
-product.get("/", async (req, resp) => {
-  const { page = 1, pageSize = 5 } = req.query;
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+});
+
+const cloudStorage = new CloudinaryStorage({
+  cloudinary: cloudinary,
+  params: {
+    folder: "productIMG",
+
+    public_id: (req, file) => file.name,
+  },
+});
+
+const cloudUpload = multer({ storage: cloudStorage });
+
+product.post(
+  "/cloudUploadImg",
+  cloudUpload.single("uploadImg"),
+  async (req, res) => {
+    try {
+      res.status(200).json({ source: req.file.path });
+    } catch (error) {
+      res.status(500).send({
+        statusCode: 500,
+        message: "internal server erroror",
+      });
+    }
+  }
+);
+
+product.get("/", async (req, res) => {
+  const { page = 1, pageSize = 40 } = req.query;
   try {
     const product = await productModel
       .find()
@@ -13,13 +50,43 @@ product.get("/", async (req, resp) => {
       .skip((page - 1) * pageSize);
     const totalProducts = await productModel.countDocuments();
 
-    resp.status(200).send({
+    res.status(200).send({
       product,
       currentPage: +page,
       totalPages: Math.ceil(totalProducts / pageSize),
     });
   } catch (e) {
-    resp.status(500).send({
+    res.status(500).send({
+      statusCode: 500,
+      message: "internal server erroror",
+    });
+  }
+});
+
+product.get("/filter", async (req, res) => {
+  const { page = 1, pageSize = 40, searchTerm = "", category = "" } = req.query;
+  const query = {};
+  if (searchTerm) {
+    query.title = new RegExp(searchTerm, "i");
+  }
+  if (category) {
+    query.category = category;
+  }
+
+  try {
+    const product = await productModel
+      .find(query)
+      .limit(pageSize)
+      .skip((page - 1) * pageSize);
+    const totalProducts = await productModel.countDocuments(query);
+
+    res.status(200).send({
+      product,
+      currentPage: +page,
+      totalPages: Math.ceil(totalProducts / pageSize),
+    });
+  } catch (e) {
+    res.status(500).send({
       statusCode: 500,
       message: "internal server erroror",
     });

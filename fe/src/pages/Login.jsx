@@ -1,15 +1,26 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import { Col } from "react-bootstrap";
 import AxiosClient from "../client/client";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate, Link, json } from "react-router-dom";
+import MyNavBar from "../components/MyNavBar";
+import "./Login.css";
 
 const Login = () => {
   const client = new AxiosClient();
   const [formData, setFormData] = useState({});
-  console.log(formData);
+  const [error, setError] = useState(null);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const token = urlParams.get("token");
+    if (token) {
+      localStorage.setItem("auth", JSON.stringify(token));
+      navigate("/cart");
+    }
+  }, []);
 
   const onChangeInput = (e) => {
     const { name, value } = e.target;
@@ -20,10 +31,18 @@ const Login = () => {
   };
   const onSubmit = async (e) => {
     e.preventDefault();
-    const response = await client.post("/login", formData);
-    if (response.statusCode === 200) {
-      localStorage.setItem("auth", JSON.stringify(response.token));
-      navigate("/home");
+    try {
+      const response = await client.post("/login", formData);
+      if (response.statusCode === 200) {
+        localStorage.setItem("auth", JSON.stringify(response.token));
+        navigate("/cart");
+      }
+    } catch (error) {
+      if (error.response && error.response.status === 401) {
+        setError("EMAIL OR PASSWORD ERROR");
+      } else if (error.response && error.response.status === 404) {
+        setError("USER ERROR");
+      }
     }
   };
 
@@ -32,54 +51,60 @@ const Login = () => {
   };
 
   return (
-    <Form onSubmit={onSubmit} className="m-5" style={{ width: 400 }}>
-      <Form.Group className="mb-3" controlId="formBasicEmail">
-        <Form.Label>Email</Form.Label>
-        <Form.Control
-          name="email"
-          type="email"
-          onChange={onChangeInput}
-          placeholder="Enter email"
-        />
-      </Form.Group>
+    <>
+      <MyNavBar />
+      <div className="loginForm">
+        {error && <div className="alert alert-danger">{error}</div>}
+        <Form onSubmit={onSubmit} className="m-5 " style={{ width: 400 }}>
+          <Form.Group className="mb-3" controlId="formBasicEmail">
+            <Form.Label>Email</Form.Label>
+            <Form.Control
+              name="email"
+              type="email"
+              onChange={onChangeInput}
+              placeholder="Enter email"
+            />
+          </Form.Group>
 
-      <Form.Group className="mb-3" controlId="formBasicPassword">
-        <Form.Label>Password</Form.Label>
-        <Form.Control
-          name="password"
-          type="password"
-          onChange={onChangeInput}
-          placeholder="Password"
-        />
-      </Form.Group>
+          <Form.Group className="mb-3" controlId="formBasicPassword">
+            <Form.Label>Password</Form.Label>
+            <Form.Control
+              name="password"
+              type="password"
+              onChange={onChangeInput}
+              placeholder="Password"
+            />
+          </Form.Group>
 
-      <Form.Group className="mb-3">
-        <Col>
-          <Button variant="primary" type="submit">
-            Login
-          </Button>
-        </Col>
-      </Form.Group>
+          <Form.Group className="mb-3">
+            <Col>
+              <Button variant="primary" type="submit">
+                Login
+              </Button>
+            </Col>
+          </Form.Group>
 
-      <Form.Group className="mb-3">
-        <Col>
-          if you are not registered
-          <Link to="/register">Register here</Link>
-        </Col>
-      </Form.Group>
+          <Form.Group className="mb-3">
+            <Col>
+              if you are not registered
+              <Link to="/register">Register here</Link>
+            </Col>
+          </Form.Group>
 
-      <Form.Group>
-        <Col>
-          <Button
-            onClick={handleLoginWithGithub}
-            variant="success"
-            type="submit"
-          >
-            Login with Github
-          </Button>
-        </Col>
-      </Form.Group>
-    </Form>
+          <Form.Group>
+            <Col>
+              <Button
+                onClick={handleLoginWithGithub}
+                variant="success"
+                type="button"
+              >
+                Login with Github
+              </Button>
+            </Col>
+          </Form.Group>
+        </Form>
+      </div>
+    </>
   );
 };
 
