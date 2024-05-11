@@ -9,7 +9,7 @@ const MyNavBar = () => {
   return (
     <Navbar className="mb-5 myNavbar" variant="dark" expand="lg">
       <div className="d-flex container">
-        <Navbar.Brand>STRIVEBLOG</Navbar.Brand>
+        <Navbar.Brand>STRIVESHOP</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav ">
           <Nav className="mr-auto">

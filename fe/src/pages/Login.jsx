@@ -55,7 +55,7 @@ const Login = () => {
       <MyNavBar />
       <div className="loginForm">
         {error && <div className="alert alert-danger">{error}</div>}
-        <Form onSubmit={onSubmit} className="m-5 " style={{ width: 400 }}>
+        <Form onSubmit={onSubmit} className="m-5 ">
           <Form.Group className="mb-3" controlId="formBasicEmail">
             <Form.Label>Email</Form.Label>
             <Form.Control

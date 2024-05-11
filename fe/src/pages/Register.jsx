@@ -3,6 +3,7 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import AxiosClient from "../client/client";
 import { useNavigate } from "react-router-dom";
+import "./Register.css";
 
 const Register = () => {
   const client = new AxiosClient();
@@ -27,7 +28,7 @@ const Register = () => {
   };
 
   return (
-    <Form onSubmit={onSubmit} className="m-5" style={{ width: 400 }}>
+    <Form onSubmit={onSubmit} className="m-5 registerForm">
       <Form.Group className="mb-3" controlId="formBasicFirstName">
         <Form.Label>First Name</Form.Label>
         <Form.Control
