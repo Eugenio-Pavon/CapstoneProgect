@@ -107,7 +107,8 @@ function AllProducts() {
         <select value={categories} onChange={handleCategoriesChange}>
           <option value="All">All</option>
           <option value="electronic">electronic</option>
-          <option value="Books">books</option>
+          <option value="books">books</option>
+          <option value="chair">chair</option>
         </select>
       </div>
       <div className="row">
