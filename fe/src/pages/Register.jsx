@@ -4,6 +4,7 @@ import Form from "react-bootstrap/Form";
 import AxiosClient from "../client/client";
 import { useNavigate } from "react-router-dom";
 import "./Register.css";
+import MyNavBar from "../components/MyNavBar";
 
 const Register = () => {
   const client = new AxiosClient();
@@ -28,51 +29,54 @@ const Register = () => {
   };
 
   return (
-    <Form onSubmit={onSubmit} className="m-5 registerForm">
-      <Form.Group className="mb-3" controlId="formBasicFirstName">
-        <Form.Label>First Name</Form.Label>
-        <Form.Control
-          name="firstName"
-          type="text"
-          onChange={onChangeInput}
-          placeholder="Enter first name"
-        />
-      </Form.Group>
+    <>
+      <MyNavBar />
+      <Form onSubmit={onSubmit} className="m-5 registerForm">
+        <Form.Group className="mb-3" controlId="formBasicFirstName">
+          <Form.Label>First Name</Form.Label>
+          <Form.Control
+            name="firstName"
+            type="text"
+            onChange={onChangeInput}
+            placeholder="Enter first name"
+          />
+        </Form.Group>
 
-      <Form.Group className="mb-3" controlId="formBasicLastName">
-        <Form.Label>Last Name</Form.Label>
-        <Form.Control
-          name="lastName"
-          type="text"
-          onChange={onChangeInput}
-          placeholder="Enter last name"
-        />
-      </Form.Group>
+        <Form.Group className="mb-3" controlId="formBasicLastName">
+          <Form.Label>Last Name</Form.Label>
+          <Form.Control
+            name="lastName"
+            type="text"
+            onChange={onChangeInput}
+            placeholder="Enter last name"
+          />
+        </Form.Group>
 
-      <Form.Group className="mb-3" controlId="formBasicEmail">
-        <Form.Label>Email</Form.Label>
-        <Form.Control
-          name="email"
-          type="email"
-          onChange={onChangeInput}
-          placeholder="Enter email"
-        />
-      </Form.Group>
+        <Form.Group className="mb-3" controlId="formBasicEmail">
+          <Form.Label>Email</Form.Label>
+          <Form.Control
+            name="email"
+            type="email"
+            onChange={onChangeInput}
+            placeholder="Enter email"
+          />
+        </Form.Group>
 
-      <Form.Group className="mb-3" controlId="formBasicPassword">
-        <Form.Label>Password</Form.Label>
-        <Form.Control
-          name="password"
-          type="password"
-          onChange={onChangeInput}
-          placeholder="Password"
-        />
-      </Form.Group>
+        <Form.Group className="mb-3" controlId="formBasicPassword">
+          <Form.Label>Password</Form.Label>
+          <Form.Control
+            name="password"
+            type="password"
+            onChange={onChangeInput}
+            placeholder="Password"
+          />
+        </Form.Group>
 
-      <Button variant="primary" type="submit">
-        Register
-      </Button>
-    </Form>
+        <Button variant="primary" type="submit">
+          Register
+        </Button>
+      </Form>
+    </>
   );
 };
 
