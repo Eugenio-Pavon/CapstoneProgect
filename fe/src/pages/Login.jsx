@@ -3,9 +3,10 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import { Col } from "react-bootstrap";
 import AxiosClient from "../client/client";
-import { useNavigate, Link, json } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import MyNavBar from "../components/MyNavBar";
 import "./Login.css";
+import Footer from "../components/Footer";
 
 const Login = () => {
   const client = new AxiosClient();
@@ -104,6 +105,7 @@ const Login = () => {
           </Form.Group>
         </Form>
       </div>
+      <Footer />
     </>
   );
 };

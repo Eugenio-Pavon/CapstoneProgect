@@ -5,6 +5,7 @@ import AxiosClient from "../client/client";
 import { useNavigate } from "react-router-dom";
 import "./Register.css";
 import MyNavBar from "../components/MyNavBar";
+import Footer from "../components/Footer";
 
 const Register = () => {
   const client = new AxiosClient();
@@ -76,6 +77,7 @@ const Register = () => {
           Register
         </Button>
       </Form>
+      <Footer />
     </>
   );
 };

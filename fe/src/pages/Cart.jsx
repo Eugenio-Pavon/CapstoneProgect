@@ -5,6 +5,7 @@ import Button from "react-bootstrap/Button";
 import MyNavBar from "../components/MyNavBar";
 import "./Cart.css";
 import { useNavigate } from "react-router-dom";
+import Footer from "../components/Footer";
 
 function Cart() {
   const { state, dispatch } = useCart();
@@ -140,6 +141,7 @@ function Cart() {
           Finish and pay
         </span>
       </div>
+      <Footer />
     </>
   );
 }

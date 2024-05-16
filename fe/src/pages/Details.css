@@ -3,6 +3,7 @@
   margin: 0 auto;
   padding: 20px;
   margin-top: 50px;
+  min-height: 700px;
 }
 
 .details-container h2 {

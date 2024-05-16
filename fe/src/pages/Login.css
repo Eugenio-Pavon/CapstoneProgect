@@ -1,6 +1,7 @@
 .loginForm {
   margin-top: 70px;
   max-width: 90%;
+  min-height: 700px;
 }
 
 .loginForm form input {

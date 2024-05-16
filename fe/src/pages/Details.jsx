@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { useCart } from "../context/CartContext";
 import MyNavBar from "../components/MyNavBar";
 import "./Details.css";
+import Footer from "../components/Footer";
 
 function Details() {
   const { id } = useParams();
@@ -56,6 +57,7 @@ function Details() {
         <button onClick={addToCart}>Add to cart</button>
         <Link to="/cart">Go to cart</Link>
       </div>
+      <Footer />
     </>
   );
 }
