@@ -11,7 +11,7 @@ const app = express();
 const userRoute = require("./routes/user");
 const productRoute = require("./routes/product");
 const loginRoute = require("./routes/login");
-const githubRoute = require("./routes/github");
+const githubRoute = require("./routes");
 
 app.use(cors());
 app.use(express.json());

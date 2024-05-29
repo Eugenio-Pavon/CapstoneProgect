@@ -66,8 +66,4 @@ github.get(
   }
 );
 
-// github.get("/cart", (req, res) => {
-//   res.redirect("http://localhost:3000/cart");
-// });
-
 module.exports = github;
