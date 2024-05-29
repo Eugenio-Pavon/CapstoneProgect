@@ -6,7 +6,7 @@ const session = require("express-session");
 const passport = require("passport");
 require("dotenv").config();
 
-gitHub.use(
+github.use(
   session({
     secret: process.env.GITHUB_CLIENT_SECRET,
     resave: false,
@@ -66,4 +66,4 @@ github.get(
   }
 );
 
-module.exports = gitHub;
+module.exports = github;
