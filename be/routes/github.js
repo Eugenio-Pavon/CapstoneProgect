@@ -6,7 +6,7 @@ const session = require("express-session");
 const passport = require("passport");
 require("dotenv").config();
 
-gitHub.use(
+github.use(
   session({
     secret: process.env.GITHUB_CLIENT_SECRET,
     resave: false,
@@ -27,7 +27,7 @@ passport.deserializeUser((user, done) => {
 });
 
 passport.use(
-  new GitHubStrategy(
+  new GithubStrategy(
     {
       clientID: process.env.GITHUB_CLIENT_ID,
       clientSecret: process.env.GITHUB_CLIENT_SECRET,
@@ -40,9 +40,9 @@ passport.use(
   )
 );
 
-gitHub.get(
-  "/auth/gitHub",
-  passport.authenticate("gitHub", { scope: ["user:email"] }),
+github.get(
+  "/auth/github",
+  passport.authenticate("github", { scope: ["user:email"] }),
   (req, res) => {
     const redirectUrl = `http://localhost:3000/cart?user=${encodeURIComponent(
       JSON.stringify(req.user)
@@ -51,7 +51,7 @@ gitHub.get(
   }
 );
 
-gitHub.get(
+github.get(
   "/auth/github/callback",
   passport.authenticate("github", { failureRedirect: "/" }),
   (req, res) => {
