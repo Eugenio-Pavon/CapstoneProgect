@@ -91,7 +91,7 @@ const Login = () => {
               <Link to="/register">Register here</Link>
             </Col>
           </Form.Group>
-          {/* 
+
           <Form.Group>
             <Col>
               <Button
@@ -102,7 +102,7 @@ const Login = () => {
                 Login with Github
               </Button>
             </Col>
-          </Form.Group> */}
+          </Form.Group>
         </Form>
       </div>
       <Footer />
