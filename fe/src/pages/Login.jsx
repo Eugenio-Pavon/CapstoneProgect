@@ -94,13 +94,13 @@ const Login = () => {
 
           <Form.Group>
             <Col>
-              <Button
+              {/* <Button
                 onClick={handleLoginWithGithub}
                 variant="success"
                 type="button"
               >
                 Login with Github
-              </Button>
+              </Button> */}
             </Col>
           </Form.Group>
         </Form>
